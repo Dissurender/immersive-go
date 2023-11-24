@@ -73,12 +73,11 @@ func handleResp(res *http.Response) error {
 				return fmt.Errorf("Retry-After value not valid")
 			}
 		} else {
-			fmt.Fprintln(os.Stderr, "No Retry-After property found.")
 			return fmt.Errorf("No Retry-After property found")
 		}
 
 	default:
-		fmt.Fprintf(os.Stderr, "Unexpected Response Code: %d", res.StatusCode)
+		return fmt.Errorf("Unexpected Response Code: %d", res.StatusCode)
 	}
 
 	return nil
